@@ -1,0 +1,58 @@
+name: Check for new structural data source (free, no AI)
+
+on:
+  schedule:
+    - cron: "0 6 15 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+
+      - id: check
+        run: python scripts/canary_check.py
+
+      - name: Open issue if a new source was found
+        if: steps.check.outputs.new_source_found == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const targetFy = "${{ steps.check.outputs.target_fy }}";
+            const foundUrls = "${{ steps.check.outputs.found_urls }}";
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `FY${targetFy} budget documents are available — manual data refresh due`,
+              body: [
+                `A new fiscal year's budget justification document(s) have been detected:`,
+                ``,
+                foundUrls.split(',').map(u => `- ${u}`).join('\n'),
+                ``,
+                `This repo does not call any AI automatically. To refresh the structural`,
+                `dataset, run this locally:`,
+                ``,
+                '```',
+                `python scripts/build_extraction_prompt.py --target-fy ${targetFy} --urls "${foundUrls}"`,
+                '```',
+                ``,
+                `Then follow the instructions written to extraction_prompt_fy${targetFy}.txt`,
+                `— paste the prompt and PDF(s) into your own Claude conversation, save the`,
+                `reply to data/pending_extraction.json, and run:`,
+                ``,
+                '```',
+                `python scripts/merge_manual_extraction.py --target-fy ${targetFy}`,
+                '```',
+                ``,
+                `This issue will stay open until you close it after merging.`,
+              ].join('\n'),
+            });
