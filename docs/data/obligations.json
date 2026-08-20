@@ -1,8 +1,457 @@
 {
-  "generated": null,
+  "generated": "2026-08-20",
   "source": "USASpending.gov API (api.usaspending.gov), no auth",
-  "accounts": {},
+  "accounts": {
+    "012-1115": {
+      "toptier": "012",
+      "name": "Forest Service \u2014 Wildland Fire Management"
+    },
+    "012-1121": {
+      "toptier": "012",
+      "name": "Forest Service \u2014 Wildfire Suppression Operations Reserve Fund"
+    },
+    "014-1125": {
+      "toptier": "014",
+      "name": "Department of the Interior \u2014 Wildland Fire Management"
+    },
+    "014-0130": {
+      "toptier": "014",
+      "name": "Department of the Interior \u2014 Wildfire Suppression Operations Reserve Fund"
+    }
+  },
   "records": [],
-  "_debug_unmatched_samples": [],
-  "_note": "Placeholder — populated by the first run of .github/workflows/update-data.yml"
+  "_debug_unmatched_samples": [
+    {
+      "account_code": "012-1115",
+      "fy": 2017,
+      "sample": {
+        "code": "012-3505",
+        "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+        "children": [
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2017/2017-3505-000",
+            "obligated_amount": 69583077729.1,
+            "gross_outlay_amount": 66685215966.97
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2017/2018-3505-000",
+            "obligated_amount": 910987689.4,
+            "gross_outlay_amount": 465796105.35
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2017-3505-000",
+            "obligated_amount": 257527275.0,
+            "gross_outlay_amount": 257527275.0
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2016-3505-000",
+            "obligated_amount": 62722075.36,
+            "gross_outlay_amount": 2142348447.26
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2015-3505-000",
+            "obligated_amount": 42049440.98,
+            "gross_outlay_amount": 82192014.36
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2014/2014-3505-000",
+            "obligated_amount": 28290610.02,
+            "gross_outlay_amount": 31977761.32
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2017-3505-000",
+            "obligated_amount": 14249228.45,
+            "gross_outlay_amount": 433395603.71
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2014/2015-3505-000",
+            "obligated_amount": 2870857.53,
+            "gross_outlay_amount": 5532729.23
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2013/2013-3505-000",
+            "obligated_amount": 2618889.23,
+            "gross_outlay_amount": 24961830.3
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2012/2012-3505-000",
+            "obligated_amount": 2584219.05,
+            "gross_outlay_amount": 3234422.83
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2016-3505-000",
+            "obligated_amount": 592343.39,
+            "gross_outlay_amount": 25103595.34
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-X-3505-000",
+            "obligated_amount": 48565.35,
+            "gross_outlay_amount": 4179047.82
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2013/2014-3505-000",
+            "obligated_amount": 4655.44,
+            "gross_outlay_amount": 0.0
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2011/2012-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 0.0
+          },
+          {
+            "name": "Food Stamp Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2014/2018-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 2077186.14
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2018-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 38401765.02
+          }
+        ],
+        "obligated_amount": 70907623578.3,
+        "gross_outlay_amount": 70201943750.65
+      }
+    },
+    {
+      "account_code": "012-1115",
+      "fy": 2018,
+      "sample": {
+        "code": "012-3505",
+        "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+        "children": [
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2018/2018-3505-000",
+            "obligated_amount": 65462408373.73,
+            "gross_outlay_amount": 62656855980.33
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2018-3505-000",
+            "obligated_amount": 3000000000.0,
+            "gross_outlay_amount": 2407652164.4
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2018/2019-3505-000",
+            "obligated_amount": 904101088.11,
+            "gross_outlay_amount": 402231502.74
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2017/2017-3505-000",
+            "obligated_amount": 49207800.58,
+            "gross_outlay_amount": 2423696552.69
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2017/2018-3505-000",
+            "obligated_amount": 48024319.35,
+            "gross_outlay_amount": 487958406.12
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2016-3505-000",
+            "obligated_amount": 17948934.42,
+            "gross_outlay_amount": 47370008.97
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-X-3505-000",
+            "obligated_amount": 7548160.0,
+            "gross_outlay_amount": 5331369.37
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2018-3505-000",
+            "obligated_amount": 2666619.0,
+            "gross_outlay_amount": 47214944.05
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2015-3505-000",
+            "obligated_amount": 1261960.79,
+            "gross_outlay_amount": 15250439.3
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2013/2013-3505-000",
+            "obligated_amount": 1233974.24,
+            "gross_outlay_amount": 2586942.13
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2014/2014-3505-000",
+            "obligated_amount": 1198240.62,
+            "gross_outlay_amount": 7307871.5
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2016-3505-000",
+            "obligated_amount": 323276.34,
+            "gross_outlay_amount": 51547.14
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2017-3505-000",
+            "obligated_amount": 125034.29,
+            "gross_outlay_amount": 42149962.91
+          },
+          {
+            "name": "Food Stamp Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2014/2018-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 364986.78
+          }
+        ],
+        "obligated_amount": 69496047781.47,
+        "gross_outlay_amount": 68546022678.43
+      }
+    },
+    {
+      "account_code": "012-1115",
+      "fy": 2019,
+      "sample": {
+        "code": "012-3505",
+        "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+        "children": [
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2019/2019-3505-000",
+            "obligated_amount": 62610360436.77,
+            "gross_outlay_amount": 59405195529.51
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2019/2020-3505-000",
+            "obligated_amount": 925590884.73,
+            "gross_outlay_amount": 418592475.95
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2017/2019-3505-000",
+            "obligated_amount": 167750980.0,
+            "gross_outlay_amount": 167750980.0
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2018/2019-3505-000",
+            "obligated_amount": 119923673.18,
+            "gross_outlay_amount": 490337192.4
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2018/2018-3505-000",
+            "obligated_amount": 100345302.52,
+            "gross_outlay_amount": 2251647483.37
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2017/2017-3505-000",
+            "obligated_amount": 35198422.67,
+            "gross_outlay_amount": 65966561.98
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2016-3505-000",
+            "obligated_amount": 14435362.43,
+            "gross_outlay_amount": 14245157.12
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-X-3505-000",
+            "obligated_amount": 8932709.0,
+            "gross_outlay_amount": 5863823.51
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2015-3505-000",
+            "obligated_amount": 5993562.76,
+            "gross_outlay_amount": 6347848.26
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2017/2018-3505-000",
+            "obligated_amount": 3972384.69,
+            "gross_outlay_amount": 61503348.05
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2017-3505-000",
+            "obligated_amount": 2473948.39,
+            "gross_outlay_amount": 977836.61
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2016-3505-000",
+            "obligated_amount": 638179.86,
+            "gross_outlay_amount": 1185.64
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2014/2014-3505-000",
+            "obligated_amount": 207624.91,
+            "gross_outlay_amount": 1310116.6
+          },
+          {
+            "name": "Food Stamp Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2014/2018-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 120375.06
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2018-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 29591720.08
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2018-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 584052424.09
+          }
+        ],
+        "obligated_amount": 63995823471.91,
+        "gross_outlay_amount": 63503504058.23
+      }
+    },
+    {
+      "account_code": "012-1115",
+      "fy": 2020,
+      "sample": {
+        "code": "012-3505",
+        "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+        "children": [
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2020/2020-3505-000",
+            "obligated_amount": 74547410372.33,
+            "gross_outlay_amount": 62240477246.03
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2020/2021-3505-000",
+            "obligated_amount": 16644270650.6,
+            "gross_outlay_amount": 16184010282.13
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2018/2020-3505-000",
+            "obligated_amount": 3000000000.0,
+            "gross_outlay_amount": 3000000000.0
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2019/2021-3505-000",
+            "obligated_amount": 1000000000.0,
+            "gross_outlay_amount": 1000000000.0
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2019/2020-3505-000",
+            "obligated_amount": 81610554.82,
+            "gross_outlay_amount": 494134631.69
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2019/2019-3505-000",
+            "obligated_amount": 66316581.58,
+            "gross_outlay_amount": 2612044832.35
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2017/2017-3505-000",
+            "obligated_amount": 26267001.12,
+            "gross_outlay_amount": 8013304.51
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2018/2018-3505-000",
+            "obligated_amount": 16561949.0,
+            "gross_outlay_amount": 85087617.02
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2018/2019-3505-000",
+            "obligated_amount": 2971584.08,
+            "gross_outlay_amount": 34287186.17
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2015-3505-000",
+            "obligated_amount": 2877434.38,
+            "gross_outlay_amount": 2900120.43
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-X-3505-000",
+            "obligated_amount": 870427.0,
+            "gross_outlay_amount": 1867980.82
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2017/2018-3505-000",
+            "obligated_amount": 314247.98,
+            "gross_outlay_amount": 15610322.15
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2016-3505-000",
+            "obligated_amount": 287166.6,
+            "gross_outlay_amount": 14009429.77
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2017-3505-000",
+            "obligated_amount": 170332.18,
+            "gross_outlay_amount": 235263.08
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2016-3505-000",
+            "obligated_amount": 38876.26,
+            "gross_outlay_amount": 1185.64
+          },
+          {
+            "name": "Food Stamp Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2014/2018-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 302175.83
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2015/2018-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 3594424.28
+          },
+          {
+            "name": "Supplemental Nutrition Assistance Program, Food and Nutrition Service, Agriculture",
+            "code": "012-2016/2018-3505-000",
+            "obligated_amount": 0.0,
+            "gross_outlay_amount": 7912252.0
+          }
+        ],
+        "obligated_amount": 95389967177.93,
+        "gross_outlay_amount": 85704488253.9
+      }
+    }
+  ]
 }
