@@ -1,0 +1,8 @@
+{
+  "generated": null,
+  "source": "USASpending.gov API (api.usaspending.gov), no auth",
+  "accounts": {},
+  "records": [],
+  "_debug_unmatched_samples": [],
+  "_note": "Placeholder — populated by the first run of .github/workflows/update-data.yml"
+}

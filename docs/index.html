@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wildfire Appropriations Tracker</title>
+<meta name="description" content="Automated tracking of federal wildfire suppression and preparedness funding — obligations, the suppression cap adjustment, and CR/appropriations status." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root {
+    --ink: #14181A;
+    --panel: #1C2321;
+    --panel-2: #222A27;
+    --hairline: #33403C;
+    --paper: #ECEAE2;
+    --paper-dim: #A9B0AC;
+    --ember: #E1672E;
+    --ember-dim: #7A3C22;
+    --slate: #6B9A8F;
+    --caution: #E8B23D;
+    --radius: 3px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    line-height: 1.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ---------- Header / status ribbon ---------- */
+  header.top {
+    border-bottom: 1px solid var(--hairline);
+    padding: 28px 0 22px;
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 42px);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .subhead {
+    color: var(--paper-dim);
+    font-size: 15px;
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .status-strip {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--hairline);
+    color: var(--paper-dim);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--slate); flex: none; }
+  .pill.warn .dot { background: var(--caution); }
+  .pill.alert .dot { background: var(--ember); }
+
+  /* ---------- Signature: containment ribbon ---------- */
+  section.containment {
+    margin-top: 44px;
+  }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+  .section-note {
+    color: var(--paper-dim);
+    font-size: 13.5px;
+    max-width: 68ch;
+    margin: 0 0 20px;
+  }
+
+  .ribbon {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 26px 24px 18px;
+    overflow: hidden;
+  }
+  .ribbon-track {
+    position: relative;
+    height: 10px;
+    background: var(--panel-2);
+    border-radius: 999px;
+    margin: 18px 0 14px;
+  }
+  .ribbon-fill {
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background: linear-gradient(90deg, var(--ember-dim), var(--ember));
+    border-radius: 999px;
+    transition: width 900ms ease-out;
+  }
+  .ribbon-ticks {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--paper-dim);
+  }
+  .ribbon-ticks .tick { text-align: center; position: relative; }
+  .ribbon-ticks .tick.current { color: var(--ember); font-weight: 600; }
+  .ribbon-ticks .tick .fy { display: block; margin-bottom: 2px; }
+  .ribbon-ticks .tick .amt { display: block; font-size: 10px; opacity: 0.8; }
+  .ribbon-headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .ribbon-headline .big {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ember);
+  }
+  .ribbon-headline .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--paper-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- Chart panels ---------- */
+  section.panel-section { margin-top: 48px; }
+  .chart-panel {
+    background: var(--panel);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius);
+    padding: 22px 22px 12px;
+  }
+  .chart-panel canvas { max-height: 340px; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 860px) {
+    .two-col { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ---------- Bills table ---------- */
+  .bills-list { list-style: none; margin: 0; padding: 0; }
+  .bills-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 14px;
+    font-size: 13.5px;
+  }
+  .bills-list li:last-child { border-bottom: none; }
+  .bills-list .bid { font-family: 'IBM Plex Mono', monospace; color: var(--slate); }
+  .bills-list .action { color: var(--paper-dim); font-size: 12.5px; margin-top: 3px; }
+  .bills-list a { color: var(--paper); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  .bills-list a:hover { border-bottom-color: var(--ember); }
+
+  .empty-note {
+    color: var(--paper-dim);
+    font-size: 13.5px;
+    font-style: italic;
+    padding: 10px 0;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 64px;
+    padding-top: 22px;
+    border-top: 1px solid var(--hairline);
+    font-size: 12.5px;
+    color: var(--paper-dim);
+  }
+  footer a { color: var(--slate); }
+  footer .meta { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <p class="eyebrow">Federal Wildfire Appropriations · Automated Tracker</p>
+    <h1>Wildfire Appropriations Tracker</h1>
+    <p class="subhead">
+      Obligations, budget authority, and the suppression cap-adjustment schedule for the
+      four federal wildfire accounts at USFS and DOI — refreshed monthly with no manual updates.
+    </p>
+    <div class="status-strip" id="statusStrip"></div>
+  </header>
+
+  <section class="containment">
+    <p class="section-label">Signature indicator</p>
+    <h2 class="section-title">Cap-adjustment containment</h2>
+    <p class="section-note">
+      The wildfire suppression cap adjustment is a temporary funding mechanism authorized only
+      through FY2027. This ribbon reads like a containment gauge on the years remaining, tracking
+      the statutory ceiling toward its sunset.
+    </p>
+    <div class="ribbon" id="containmentRibbon">
+      <div class="ribbon-headline">
+        <span class="big" id="ribbonBig">—</span>
+        <span class="label" id="ribbonLabel">loading schedule</span>
+      </div>
+      <div class="ribbon-track"><div class="ribbon-fill" id="ribbonFill"></div></div>
+      <div class="ribbon-ticks" id="ribbonTicks"></div>
+    </div>
+  </section>
+
+  <section class="panel-section">
+    <p class="section-label">Tier 1 · live, automated</p>
+    <h2 class="section-title">Obligations by account</h2>
+    <p class="section-note">Pulled monthly from the USASpending.gov API. No manual updates.</p>
+    <div class="chart-panel">
+      <canvas id="obligationsChart"></canvas>
+    </div>
+  </section>
+
+  <section class="panel-section two-col">
+    <div>
+      <p class="section-label">Tier 2 · annual, AI-assisted</p>
+      <h2 class="section-title">Base vs. cap adjustment</h2>
+      <p class="section-note">Sourced from CRS/budget-justification documents, refreshed once a year.</p>
+      <div class="chart-panel">
+        <canvas id="structuralChart"></canvas>
+      </div>
+    </div>
+    <div>
+      <p class="section-label">Tier 1 · live, automated</p>
+      <h2 class="section-title">Appropriations &amp; CR status</h2>
+      <p class="section-note">Recent relevant bills from Congress.gov, filtered for CRs and Interior/Environment appropriations.</p>
+      <div class="chart-panel" style="padding-bottom: 8px;">
+        <ul class="bills-list" id="billsList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      Data sources: <a href="https://www.usaspending.gov/" target="_blank" rel="noopener">USASpending.gov</a>,
+      <a href="https://www.congress.gov/" target="_blank" rel="noopener">Congress.gov</a>,
+      CRS &amp; agency budget justifications (annual, AI-assisted extraction — see
+      <a href="https://github.com/" target="_blank" rel="noopener">repo README</a> for methodology).
+      Figures are enacted budget authority and reported obligations, not a forecast or legal advice.
+    </p>
+    <p class="meta" id="footerMeta">loading…</p>
+  </footer>
+
+</div>
+
+<script>
+const FMT = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+const FMT_COMPACT = new Intl.NumberFormat('en-US', { notation: 'compact', style: 'currency', currency: 'USD', maximumFractionDigits: 1 });
+
+async function loadJSON(path) {
+  try {
+    const res = await fetch(path, { cache: 'no-store' });
+    if (!res.ok) throw new Error(res.status);
+    return await res.json();
+  } catch (e) {
+    console.warn('Failed to load', path, e);
+    return null;
+  }
+}
+
+function chartTheme() {
+  return {
+    color: '#A9B0AC',
+    grid: '#2A332F',
+    fontFamily: "'IBM Plex Mono', monospace",
+  };
+}
+
+function renderStatusStrip(obligations, congress) {
+  const strip = document.getElementById('statusStrip');
+  const pills = [];
+
+  if (obligations && obligations.generated) {
+    pills.push(`<span class="pill"><span class="dot"></span>Obligations updated ${obligations.generated}</span>`);
+  } else {
+    pills.push(`<span class="pill warn"><span class="dot"></span>Obligations data not yet generated</span>`);
+  }
+
+  if (congress && congress.bills && congress.bills.length > 0) {
+    pills.push(`<span class="pill alert"><span class="dot"></span>${congress.bills.length} relevant bill(s) tracked</span>`);
+  } else {
+    pills.push(`<span class="pill"><span class="dot"></span>No active CR/appropriations bill detected</span>`);
+  }
+
+  strip.innerHTML = pills.join('');
+}
+
+function renderContainmentRibbon(structural) {
+  const schedule = (structural && structural.cap_adjustment_statutory_schedule && structural.cap_adjustment_statutory_schedule.schedule_usd) || {};
+  const years = Object.keys(schedule).map(Number).sort((a, b) => a - b);
+  if (years.length === 0) return;
+
+  const firstYear = years[0];
+  const lastYear = years[years.length - 1]; // sunset year, e.g. 2027
+  const today = new Date();
+  const currentFY = today.getMonth() >= 9 ? today.getFullYear() + 1 : today.getFullYear();
+  const activeFY = Math.min(Math.max(currentFY, firstYear), lastYear);
+
+  const pct = ((activeFY - firstYear) / (lastYear - firstYear)) * 100;
+  document.getElementById('ribbonFill').style.width = pct + '%';
+
+  const yearsLeft = Math.max(lastYear - activeFY, 0);
+  document.getElementById('ribbonBig').textContent = yearsLeft === 0
+    ? `FY${lastYear} — final authorized year`
+    : `${yearsLeft} fiscal year${yearsLeft === 1 ? '' : 's'} remaining`;
+  document.getElementById('ribbonLabel').textContent = `until the FY${lastYear} cap-adjustment sunset`;
+
+  const ticksEl = document.getElementById('ribbonTicks');
+  ticksEl.innerHTML = years.map(y => `
+    <div class="tick ${y === activeFY ? 'current' : ''}">
+      <span class="fy">FY${y}</span>
+      <span class="amt">${FMT_COMPACT.format(schedule[y])}</span>
+    </div>
+  `).join('');
+}
+
+function renderObligationsChart(obligations) {
+  const ctx = document.getElementById('obligationsChart');
+  const records = (obligations && obligations.records) || [];
+  const theme = chartTheme();
+
+  if (records.length === 0) {
+    ctx.parentElement.innerHTML = '<p class="empty-note">No obligations data yet — this populates after the first scheduled run of update-data.yml, or run scripts/fetch_usaspending.py locally.</p>';
+    return;
+  }
+
+  const accountCodes = [...new Set(records.map(r => r.account_code))];
+  const years = [...new Set(records.map(r => r.fiscal_year))].sort();
+  const palette = ['#E1672E', '#6B9A8F', '#E8B23D', '#8E7AB5'];
+
+  const datasets = accountCodes.map((code, i) => {
+    const name = (records.find(r => r.account_code === code) || {}).account_name || code;
+    return {
+      label: `${code} — ${name}`,
+      data: years.map(y => {
+        const rec = records.find(r => r.account_code === code && r.fiscal_year === y);
+        return rec ? rec.obligations : null;
+      }),
+      borderColor: palette[i % palette.length],
+      backgroundColor: palette[i % palette.length] + '33',
+      tension: 0.25,
+      spanGaps: true,
+    };
+  });
+
+  new Chart(ctx, {
+    type: 'line',
+    data: { labels: years.map(y => 'FY' + y), datasets },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: theme.color, font: { family: theme.fontFamily, size: 10.5 } } },
+      },
+      scales: {
+        x: { ticks: { color: theme.color, font: { family: theme.fontFamily } }, grid: { color: theme.grid } },
+        y: {
+          ticks: { color: theme.color, font: { family: theme.fontFamily }, callback: v => FMT_COMPACT.format(v) },
+          grid: { color: theme.grid },
+        },
+      },
+    },
+  });
+}
+
+function renderStructuralChart(structural) {
+  const ctx = document.getElementById('structuralChart');
+  const baseline = structural && structural.base_discretionary_baseline;
+  const schedule = structural && structural.cap_adjustment_statutory_schedule && structural.cap_adjustment_statutory_schedule.schedule_usd;
+  const theme = chartTheme();
+
+  if (!baseline || !schedule) {
+    ctx.parentElement.innerHTML = '<p class="empty-note">Structural dataset not yet available.</p>';
+    return;
+  }
+
+  const baseTotal = baseline.USFS_usd + baseline.DOI_usd;
+  const years = Object.keys(schedule).map(Number).sort((a, b) => a - b);
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: years.map(y => 'FY' + y),
+      datasets: [
+        {
+          label: 'Base (frozen, FY2015 avg.)',
+          data: years.map(() => baseTotal),
+          backgroundColor: '#6B9A8F',
+          stack: 's',
+        },
+        {
+          label: 'Cap adjustment (statutory max)',
+          data: years.map(y => schedule[y]),
+          backgroundColor: '#E1672E',
+          stack: 's',
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { labels: { color: theme.color, font: { family: theme.fontFamily, size: 10.5 } } },
+      },
+      scales: {
+        x: { stacked: true, ticks: { color: theme.color, font: { family: theme.fontFamily } }, grid: { color: theme.grid } },
+        y: {
+          stacked: true,
+          ticks: { color: theme.color, font: { family: theme.fontFamily }, callback: v => FMT_COMPACT.format(v) },
+          grid: { color: theme.grid },
+        },
+      },
+    },
+  });
+}
+
+function renderBillsList(congress) {
+  const list = document.getElementById('billsList');
+  const bills = (congress && congress.bills) || [];
+
+  if (bills.length === 0) {
+    list.innerHTML = '<li class="empty-note" style="display:block;border:none;">No relevant bills tracked yet — populates after the first scheduled run of update-data.yml (requires CONGRESS_API_KEY).</li>';
+    return;
+  }
+
+  list.innerHTML = bills.slice(0, 8).map(b => `
+    <li>
+      <span class="bid">${b.type || ''} ${b.number || ''}</span>
+      <span>
+        <a href="${b.url || '#'}" target="_blank" rel="noopener">${b.title || 'Untitled'}</a>
+        <div class="action">${b.latest_action_date || ''} — ${b.latest_action_text || ''}</div>
+      </span>
+    </li>
+  `).join('');
+}
+
+async function main() {
+  const [obligations, congress, structural] = await Promise.all([
+    loadJSON('data/obligations.json'),
+    loadJSON('data/congress_status.json'),
+    loadJSON('data/structural.json'),
+  ]);
+
+  renderStatusStrip(obligations, congress);
+  renderContainmentRibbon(structural);
+  renderObligationsChart(obligations);
+  renderStructuralChart(structural);
+  renderBillsList(congress);
+
+  document.getElementById('footerMeta').textContent =
+    `obligations: ${obligations && obligations.generated || 'n/a'} · congress: ${congress && congress.generated || 'n/a'} · structural: ${structural && structural.generated || 'n/a'}`;
+}
+
+main();
+</script>
+</body>
+</html>

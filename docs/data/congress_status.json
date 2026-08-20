@@ -1,0 +1,7 @@
+{
+  "generated": null,
+  "source": "Congress.gov API",
+  "congress": null,
+  "bills": [],
+  "_note": "Placeholder — populated by the first run of .github/workflows/update-data.yml"
+}

@@ -1,0 +1,38 @@
+{
+  "generated": "2026-08-19",
+  "source": "Manual seed from CRS/TCS scoping research — see notes on each record. Expanded annually by scripts/tier2_extract.py.",
+  "base_discretionary_baseline": {
+    "note": "Per the FY2018 wildfire funding fix (P.L. 115-141, Div. O), the 'base' suppression budget is frozen at the FY2015 10-year rolling average. This amount does not change year to year absent new legislation.",
+    "USFS_usd": 1011000000,
+    "DOI_usd": 383700000,
+    "source": "CRS IF13102, Funding for Wildfire Management: FY2025 Appropriations for Forest Service and Department of the Interior",
+    "source_url": "https://www.congress.gov/crs-product/IF13102"
+  },
+  "cap_adjustment_statutory_schedule": {
+    "note": "Statutory maximum combined (USFS+DOI) wildfire suppression cap adjustment available under 2 U.S.C. 901(b)(2)(F), by fiscal year. This is a ceiling set in law, not necessarily the amount enacted in a given year — see 'records' for confirmed enacted amounts.",
+    "source": "Taxpayers for Common Sense, Five Fast Facts about the Wildfire Suppression Operations Reserve Fund",
+    "source_url": "https://www.taxpayer.net/disaster/five-fast-facts-about-the-wildfire-suppression-operations-reserve-fund/",
+    "schedule_usd": {
+      "2020": 2250000000,
+      "2021": 2350000000,
+      "2022": 2450000000,
+      "2023": 2550000000,
+      "2024": 2650000000,
+      "2025": 2750000000,
+      "2026": 2850000000,
+      "2027": 2950000000
+    }
+  },
+  "records": [
+    {
+      "agency": "COMBINED",
+      "account": "Wildfire Suppression Operations Reserve Fund",
+      "program_activity": "suppression",
+      "category": "cap_adjustment",
+      "fiscal_year": 2026,
+      "amount_usd": 2850000000,
+      "notes": "FY2026 enacted at the statutory cap.",
+      "_source_url": "https://www.taxpayer.net/disaster/congress-passes-fy2026-wildfire-funding-bill/"
+    }
+  ]
+}
