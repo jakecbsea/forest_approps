@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-01",
+  "generated": "2026-10-01",
   "source": "Congress.gov API (api.congress.gov), requires free api.data.gov key",
   "congress": 119,
   "bills": [
@@ -7,9 +7,9 @@
       "congress": 119,
       "type": "S",
       "number": "91",
-      "title": "Western Wildfire Support Act of 2025",
-      "latest_action_date": "2026-02-04",
-      "latest_action_text": "Committee on Energy and Natural Resources. Ordered to be reported with an amendment in the nature of a substitute favorably.",
+      "title": "Western Wildfire Support Act of 2026",
+      "latest_action_date": "2026-09-17",
+      "latest_action_text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 629.",
       "url": "https://api.congress.gov/v3/bill/119/s/91?format=json"
     }
   ]
